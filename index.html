@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#9edbd1" />
+    <meta
+      name="description"
+      content="在 80 秒內敲中正確答案，和卡皮老師一起挑戰九九乘法！"
+    />
+    <title>卡皮九九大作戰</title>
+    <link rel="preload" href="assets/main-map.png" as="image" />
+    <link rel="preload" href="assets/game-board.png" as="image" />
+    <link rel="preload" href="assets/capy-normal.png" as="image" />
+    <link rel="preload" href="assets/capy-hit.png" as="image" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="app" class="app" aria-label="卡皮九九大作戰">
+      <section id="map-screen" class="scene map-scene is-active" aria-label="卡皮學園主地圖">
+        <div class="map-title" aria-label="遊戲名稱">
+          <span class="map-title__spark">★</span>
+          <h1>卡皮九九大作戰</h1>
+          <p>乘法學園</p>
+        </div>
+
+        <button id="level-portal" class="portal-hitbox" type="button" aria-label="進入九九乘法挑戰">
+          <span>開始挑戰</span>
+        </button>
+
+        <div id="dialog" class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-speaker">
+          <div class="dialog__portrait" aria-hidden="true">
+            <img src="assets/capy-normal.png" alt="" />
+          </div>
+          <div class="dialog__content">
+            <p id="dialog-speaker" class="dialog__speaker">卡皮老師</p>
+            <p id="dialog-text" class="dialog__text"></p>
+            <div class="dialog__progress" id="dialog-progress" aria-hidden="true"></div>
+          </div>
+          <div class="dialog__actions">
+            <button id="dialog-skip" class="clay-button clay-button--quiet" type="button">略過</button>
+            <button id="dialog-next" class="clay-button" type="button">下一步</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="game-screen" class="scene game-scene" aria-label="九九乘法挑戰" aria-hidden="true">
+        <header class="hud" aria-label="遊戲狀態">
+          <div class="hud-chip hud-chip--timer" aria-label="剩餘時間">
+            <span class="hud-chip__icon" aria-hidden="true">⏱</span>
+            <strong id="timer">80</strong>
+            <small>秒</small>
+          </div>
+
+          <div class="question-board">
+            <span id="question" aria-live="polite">7 × 8 = ?</span>
+          </div>
+
+          <div class="hud__right">
+            <div class="hud-chip hud-chip--score" aria-label="答對題數">
+              <strong id="score">0</strong><span>/10</span>
+            </div>
+            <div id="lives" class="lives" aria-label="剩餘五顆愛心"></div>
+          </div>
+        </header>
+
+        <p id="stage-label" class="stage-label">暖身階段</p>
+        <div id="holes" class="holes" aria-label="九個洞口"></div>
+
+        <div id="feedback" class="feedback" role="status" aria-live="assertive"></div>
+
+        <button id="sound-toggle" class="round-control" type="button" aria-label="關閉音效" aria-pressed="false">
+          <span aria-hidden="true">♪</span>
+        </button>
+
+        <button id="exit-level" class="round-control round-control--exit" type="button" aria-label="退出關卡回主地圖">
+          <span aria-hidden="true">↩</span>
+        </button>
+
+        <img id="mallet-cursor" class="mallet-cursor" src="assets/mallet.png" alt="" aria-hidden="true" />
+
+        <div id="countdown" class="countdown" aria-live="assertive" aria-hidden="true"></div>
+
+        <div id="result" class="result" role="dialog" aria-modal="true" aria-labelledby="result-title" hidden>
+          <div class="result__card">
+            <div id="result-icon" class="result__icon" aria-hidden="true">★</div>
+            <h2 id="result-title">挑戰成功！</h2>
+            <p id="result-message"></p>
+            <div class="result__actions">
+              <button id="retry-button" class="clay-button" type="button">再玩一次</button>
+              <button id="map-button" class="clay-button clay-button--quiet" type="button">回主地圖</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="rotate-note" class="rotate-note" aria-hidden="true">
+        <span>↻</span>
+        <p>橫向遊玩會更舒服喔！</p>
+      </div>
+    </main>
+
+    <script src="game.js" defer></script>
+  </body>
+</html>
